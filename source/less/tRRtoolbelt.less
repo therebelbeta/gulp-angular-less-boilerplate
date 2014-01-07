@@ -1,0 +1,476 @@
+/* ******************************
+
+tRRtoolbelt.less
+
+handy LESS-CSS mixins and functions for common actions
+
+Dependencies:
+	LESScss
+	
+Developed by Trent Oswald <trentoswald@therebelrobot.com>
+
+For available functions, search (<ctrl>+f) for @FUNCTIONS
+
+****************************** */
+
+// Copyright (c) 2013 
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+/*==================================
+=            @COLORS            =
+==================================*/
+
+@black: #000000;
+@white: #ffffff;
+@gray: #a0a0a0;
+
+@red: #aa0000;
+@green: #00aa00;
+@blue: #0000aa;
+
+@yellow: #aaaa00;
+@cyan: #00aaaa;
+@magenta: #aa00aa;
+
+// Social Media gradient colors
+@facebook-1: #3066a2;
+@facebook-2: #14427e;
+@facebook-toolbar:#7A8EB8;
+
+@twitter-1: #1d95c9;
+@twitter-2: #0a68ae;
+
+@weibo-1: #254555;
+@weibo-2: #0F1D23;
+
+@renren-1: #387BB5;
+@renren-2: #31679C;
+
+
+/*==================================
+=            @FONTS            =
+==================================*/
+
+/*serif*/
+@georgia: Georgia, serif;
+@palatino: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+@times: "Times New Roman", Times, serif;
+
+/*sans-serif*/
+@arial: Arial, Helvetica, sans-serif;
+@arialThin: "Arial Black", Gadget, sans-serif;
+@impact: Impact, Charcoal, sans-serif;
+@lucida: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+@tahoma: Tahoma, Geneva, sans-serif;
+@trebuchet: "Trebuchet MS", Helvetica, sans-serif;
+@verdana: Verdana, Geneva, sans-serif;
+
+/*monospace*/
+@mono1: "Courier New", Courier, monospace;
+@mono2: "Lucida Console", Monaco, monospace;
+
+/*==================================
+=            @FUNCTIONS            =
+==================================*/
+
+/**
+	These functions are utilizing namespacing. They are called as the following:
+		#tRRt > #reset > .meyer; - for meyer reset css
+		#tRRt > #rounded > .all(5px) - for a 5px rounded corner
+
+		#tRRt > #functions > #ratio outputs a new variable, either @rw or @rh, standing for ratio-calculated-width and ration-calculated-height.
+		This allows you to use the new value wherever needed.
+
+	If you would like additional functions added, feel free to fork and make a pull request on github.
+**/
+
+
+// Basic Functions - completely self-contained functions
+
+@PIElocation: 'PIE.htc';
+#tRRt{
+	#reset {
+		.meyer () {
+			/* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
+			html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,
+			a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,
+			strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,
+			label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,
+			details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,
+			section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;
+			vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,
+			figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}
+			ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,
+			q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+		}
+		.html5doctor () {
+			/* html5doctor.com Reset v1.6.1 - http://cssreset.com */
+			html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,
+			cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,
+			ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,
+			aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,
+			time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;
+			vertical-align:baseline;background:transparent}body{line-height:1}article,aside,
+			details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul
+			{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,
+			q:after{content:none}a{margin:0;padding:0;font-size:100%;vertical-align:baseline;
+			background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}
+			mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}
+			abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;
+			border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;
+			margin:1em 0;padding:0}input,select{vertical-align:middle}
+		}
+		.yui3 () {
+			/* YUI 3.5.0 reset.css (http://developer.yahoo.com/yui/3/cssreset/) - http://cssreset.com */
+			html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
+			code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}
+			table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,
+			cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}
+			caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,
+			q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}
+			sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;
+			font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}
+			#yui3-css-stamp.cssreset{display:none}
+		}
+		.uniselector () {
+			/* cssreset.com */
+			*{margin:0;padding:0;}
+		}
+		.normalize () {
+			/*! normalize.css v1.0.0 | MIT License | git.io/normalize */
+			article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display:block}
+			audio,canvas,video{display:inline-block;*display:inline;*zoom:1}audio:not([controls])
+			{display:none;height:0}[hidden]{display:none}html{font-size:100%;-webkit-text-size-adjust:100%;
+			-ms-text-size-adjust:100%}html,button,input,select,textarea{font-family:sans-serif}
+			body{margin:0}a:focus{outline:thin dotted}a:active,a:hover{outline:0}h1{font-size:2em;
+			margin:.67em 0}h2{font-size:1.5em;margin:.83em 0}h3{font-size:1.17em;margin:1em 0}
+			h4{font-size:1em;margin:1.33em 0}h5{font-size:.83em;margin:1.67em 0}h6{font-size:.75em;
+			margin:2.33em 0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}blockquote
+			{margin:1em 40px}dfn{font-style:italic}mark{background:#ff0;color:#000}p,pre{margin:1em 0}
+			code,kbd,pre,samp{font-family:monospace,serif;_font-family:'courier new',monospace;
+			font-size:1em}pre{white-space:pre;white-space:pre-wrap;word-wrap:break-word}q{quotes:none}
+			q:before,q:after{content:'';content:none}small{font-size:75%}sub,sup{font-size:75%;line-height:0;
+			position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}dl,menu,ol,
+			ul{margin:1em 0}dd{margin:0 0 0 40px}menu,ol,ul{padding:0 0 0 40px}nav ul,nav ol{list-style:none;
+			list-style-image:none}img{border:0;-ms-interpolation-mode:bicubic}svg:not(:root)
+			{overflow:hidden}figure{margin:0}form{margin:0}fieldset{border:1px solid #c0c0c0;margin:0 2px;
+			padding:.35em .625em .75em}legend{border:0;padding:0;white-space:normal;*margin-left:-7px}
+			button,input,select,textarea{font-size:100%;margin:0;vertical-align:baseline;*vertical-align:middle}
+			button,input{line-height:normal}button,html input[type="button"],input[type="reset"],
+			input[type="submit"]{-webkit-appearance:button;cursor:pointer;*overflow:visible}button[disabled],
+			input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;
+			padding:0;*height:13px;*width:13px}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;
+			-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,
+			input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner
+			{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}
+		}
+		.vanilla () {
+			/** Vanilla CSS 1.0.2 - http://cssreset.com */ 
+			body{font:9pt/1.5em sans-serif;}pre,code,tt{font:1em/1.5em 'Andale Mono','Lucida Console',monospace;}h1,
+			h2,h3,h4,h5,h6,b,strong{font-weight:bold;}em,i,dfn{font-style:italic;}dfn{font-weight:bold;}p,code,pre,
+			kbd{margin:0 0 1.5em 0;}blockquote{margin:0 1.5em 1.5em 1.5em;}cite{font-style:italic;}li ul,li ol{margin:0 1.5em;}
+			ul,ol{margin:0 1.5em 1.5em 1.5em;}ul{list-style-type:disc;}ol{list-style-type:decimal;}ol ol{list-style:upper-alpha;}
+			ol ol ol{list-style:lower-roman;}ol ol ol ol{list-style:lower-alpha;}dl{margin:0 0 1.5em 0;}
+			dl dt{font-weight:bold;}dd{margin-left:1.5em;}table{margin-bottom:1.4em;width:100%;}th{font-weight:bold;}th,
+			td,caption{padding:4px 10px 4px 5px;}tfoot{font-style:italic;}sup,sub{line-height:0;}abbr,
+			acronym{border-bottom:1px dotted;}address{margin:0 0 1.5em;font-style:italic;}del{text-decoration:line-through;}
+			pre{margin:1.5em 0;white-space:pre;}img.centered,.aligncenter,div.aligncenter{display:block;margin-left:auto;
+			margin-right:auto;}img.alignright{display:inline;}img.alignleft{display:inline;}.alignright{float:right;
+			margin-left:10px;}.alignleft{float:left;margin-right:10px;}img { max-width: 100%; }* html .clearfix{height:1%;}
+			*+html .clearfix{display:inline-block;}.clearfix:after{content:".";display:block;height:0;clear:both;
+			visibility:hidden;}* html .group{height:1%;}*+html .group{display:inline-block;}.group:after{content:".";
+			display:block;height:0;clear:both;visibility:hidden;}
+		}
+	}
+	#functions {
+		#ratio {
+			.width (@h,@ow,@oh){
+				@rw: @h * (@ow/@oh);
+			}
+			.height (@w,@ow,@oh){
+				@rh: @w * (@oh/@ow);
+			}
+		}
+	}
+	#position {
+		.tl (@x:0px,@y:0px,@z:1,@type: absolute){
+			position:@type;
+			left:@x;
+			top:@y;
+			z-index:@z;
+		}
+		.tr (@x:0px,@y:0px,@z:1,@type: absolute){
+			position:@type;
+			right:@x;
+			top:@y;
+			z-index:@z;
+		}
+		.bl (@x:0px,@y:0px,@z:1,@type: absolute){
+			position:@type;
+			left:@x;
+			bottom:@y;
+			z-index:@z;
+		}
+		.br (@x:0px,@y:0px,@z:1,@type: absolute){
+			position:@type;
+			right:@x;
+			bottom:@y;
+			z-index:@z;
+		}
+	}
+	#bg {
+		.color (@color,@fade:50){
+			background-color:fade(@color,@fade); 
+		}
+		#image {
+			#stretch{
+				.all (@file,@pos: center center,@repeat: no-repeat){
+					background-image:url(@file);
+					-webkit-background-size:100% 100%;
+					background-size:100% 100%;
+					background-position:@pos;
+					background-repeat:@repeat;
+				}
+				.x (@file,@pos: center center,@repeat: no-repeat){
+					background-image:url(@file);
+					-webkit-background-size:100%;
+					background-size:100%;
+					background-position:@pos;
+					background-repeat:@repeat;
+				}
+				.y (@file,@pos: center center,@repeat: no-repeat){
+						background-image:url(@file);
+						-webkit-background-size: auto 100%;
+						background-size: auto 100%;
+						background-position:@pos;
+						background-repeat:@repeat;
+				}
+			}	
+			.cover (@file,@pos: center center,@repeat: no-repeat){
+				background-image:url(@file);
+				-webkit-background-size:'cover';
+				background-size:'cover';
+				background-position:@pos;
+				background-repeat:@repeat;
+			}
+			.contain (@file,@pos: center center,@repeat: no-repeat){
+				background-image:url(@file);
+				-webkit-background-size:'contain';
+				background-size:'contain';
+				background-position:@pos;
+				background-repeat:@repeat;
+			}
+		}
+	}
+	#gradient{
+		.h (@startColor: #EEE, @endColor: #FFF){
+			background-color: @endColor;
+			background-image: -webkit-gradient(linear, left center, right center, from(@startColor),to(@endColor));
+			background-image: -webkit-linear-gradient(left, @startColor, @endColor);
+			background-image: -moz-linear-gradient(left, @startColor, @endColor);
+			background-image: -o-linear-gradient(left, @startColor, @endColor);
+			background-image: linear-gradient(left, @startColor, @endColor);
+			filter: e(%("progid:DXImageTransform.Microsoft.gradient(GradientType=1, StartColorStr='%d', EndColorStr='%d')", @startColor, @endColor));
+			
+			.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+				-pie-background: linear-gradient(to right,@startColor, @endColor);
+				behavior: url(@PIElocation);
+			}
+		}
+		.v (@startColor: #EEE, @endColor: #FFF){
+			background-color: mix(@startColor, @endColor, 60%);
+			background-image: -webkit-gradient(linear, left top, left bottom, from(@startColor), to(@endColor));
+			background-image: -webkit-linear-gradient(top, @startColor, @endColor);
+			background-image: -moz-linear-gradient(top, @startColor, @endColor);
+			background-image: -o-linear-gradient(top, @startColor, @endColor);
+			background-image: linear-gradient(top, @startColor, @endColor);
+			filter: e(%("progid:DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='%d', EndColorStr='%d')", @startColor, @endColor));
+			
+			.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+				-pie-background: linear-gradient(to bottom,@startColor, @endColor);
+				behavior: url(@PIElocation);
+			}
+		}
+		.v3 (@startColor: #00b3ee, @middleColor: #7a43b6, @colorStop: 50%, @endColor: #c3325f){
+			background-color: mix(@middleColor, @endColor, 80%);
+			background-image: -webkit-gradient(linear, left top, left bottom, from(@startColor), color-stop(@colorStop, @middleColor), to(@endColor));
+			background-image: -webkit-linear-gradient(@startColor, @middleColor @colorStop, @endColor);
+			background-image: -moz-linear-gradient(top, @startColor, @middleColor @colorStop, @endColor);
+			background-image: -o-linear-gradient(@startColor, @middleColor @colorStop, @endColor);
+			background-image: linear-gradient(@startColor, @middleColor @colorStop, @endColor);
+			filter: e(%("progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='%d', endColorstr='%d')", @startColor, @endColor));
+		}
+		.v4 (@startColor: #B0BAC5, @middleColor1: #9DA7B2, @middleColor2: #919CA8, @endColor: #7E8A98){
+			background: mix(@middleColor1, @middleColor2, 50%);
+			background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @startColor), color-stop(50%, @middleColor1), color-stop(51%, @middleColor2), color-stop(100%, @endColor));
+			background-image: -webkit-linear-gradient(top, @startColor 0%, @middleColor1 50%, @middleColor2 51%, @endColor 100%);
+			background-image: -moz-linear-gradient(top, @startColor 0%, @middleColor1 50%, @middleColor2 51%, @endColor 100%);
+			background-image: -o-linear-gradient(top, @startColor 0%, @middleColor1 50%, @middleColor2 51%, @endColor 100%);
+			background-image: linear-gradient(top, @startColor 0%, @middleColor1 50%, @middleColor2 51%, @endColor 100%);
+		}
+		.radial (@innerColor: #EEE, @outerColor: #FFF){
+			background-color: @outerColor;
+			background-image: -webkit-gradient(radial, 50% 50%, 200, 50% 50%, 20, from(@outerColor), to(@innerColor));
+			background-image: -webkit-radial-gradient(50% 50%, @innerColor, @outerColor);
+			background-image: -moz-radial-gradient(50% 50%, @innerColor, @outerColor);
+			background-image: -o-radial-gradient(50% 50%, @innerColor, @outerColor);
+			background-image: radial-gradient(50% 50%, @innerColor, @outerColor);
+		}
+		.angle (@startColor: #555, @endColor: #333, @degrees: 45){
+			background: @endColor;
+			background-image: -webkit-gradient(linear, ~"@{degrees}deg", from(@startColor), to(@endColor));
+			background-image: -webkit-linear-gradient(~"@{degrees}deg", @startColor, @endColor);
+			background-image: -moz-linear-gradient(~"@{degrees}deg", @startColor, @endColor);
+			background-image: -o-linear-gradient(~"@{degrees}deg", @startColor, @endColor);
+			background-image: linear-gradient(~"@{degrees}deg", @startColor, @endColor);
+			
+			.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+				-pie-background: linear-gradient(~"@{degrees}deg",@startColor, @endColor);
+				behavior: url(@PIElocation);
+			}
+		}
+	}
+	#shadow{
+		.text(){
+
+		}
+		#box{
+			.in(@x:1px, @y:1px, @spread:2px, @color:#000){
+				@params: inset @x @y @spread @color;
+				-webkit-box-shadow: @params;
+				-moz-box-shadow: @params;
+				box-shadow: @params;
+				.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+					behavior: url(@PIElocation);
+				}
+			}
+			.out(@x:1px, @y:1px, @spread:2px, @color:#000){
+				@params: @x @y @spread @color;
+				-webkit-box-shadow: @params;
+				-moz-box-shadow: @params;
+				box-shadow: @params;
+				.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+					behavior: url(@PIElocation);
+				}
+			}
+			.multi (@values: "1px 1px 2px #000, 0 0 4px #fff, inset 1px 3px 2px #000") { /* for multi values */
+				-webkit-box-shadow: e(@values);
+				-moz-box-shadow: e(@values);
+				box-shadow: e(@values);
+				.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+					behavior: url(@PIElocation);
+				}
+			}
+		}
+	}
+	#rounded{
+		.all(@radius: 5px){
+			-webkit-border-radius: @radius;
+			-moz-border-radius: @radius;
+			border-radius: @radius;
+			.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+				behavior: url(@PIElocation);
+			}
+		}
+		.tl (@radius: 5px){
+			-webkit-border-top-left-radius: @radius;
+			-moz-border-top-left-radius: @radius;
+			border-top-left-radius: @radius;
+			.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+				behavior: url(@PIElocation);
+			}
+		}
+		.tr (@radius: 5px){
+			-webkit-border-top-right-radius: @radius;
+			-moz-border-top-right-radius: @radius;
+			border-top-right-radius: @radius;
+			.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+				behavior: url(@PIElocation);
+			}
+		}
+		.bl (@radius: 5px){
+			-webkit-border-bottom-left-radius: @radius;
+			-moz-border-bottom-left-radius: @radius;
+			border-bottom-left-radius: @radius;
+			.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+				behavior: url(@PIElocation);
+			}
+		}
+		.br (@radius: 5px){
+			-webkit-border-bottom-right-radius: @radius;
+			-moz-border-bottom-right-radius: @radius;
+			border-bottom-right-radius: @radius;
+			.lt-ie9 &, .lt-ie8 &, .lt-ie7 & {
+				behavior: url(@PIElocation);
+			}
+		}
+	}
+	.opacity(@opacity: 0.5) when (isnumber(@opacity)) and not (@opacity < 0) and not (@opacity > 1) {
+		zoom: 1;
+		opacity: @opacity;
+		filter: e(%("alpha(opacity=%d)", @opacity*100));
+	}
+	.box(@w:100%, @h:100%, @type:block){
+		display: 	@type;
+		width: 		@w;
+		height: 	@h;
+		.box-sizing(content-box);
+	}
+	.trans(@time:1s,@which:all,@how:ease-in-out){
+		-webkit-transition: @which @time @how;
+		-moz-transition: 		@which @time @how;
+		-o-transition: 			@which @time @how;
+		transition: 				@which @time @how; 
+	}
+	.cursor(@url,@x:0,@y:0,@IE,@fallback){
+		.modern & {
+			cursor: url(@url) @x @y, 
+			@fallback;       /* Older browsers                         */
+		}
+		.lt-ie9 & {
+			cursor: url(@IE),     
+			@fallback;     /* In case IE can't load the above.       */
+		}
+	}
+	.resize(@direction: both) { /* ( horizontal | vertical | both ) */
+		resize: @direction;
+		overflow: auto;
+	}
+	.hide-text() {
+		text-indent: 100%;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+	.clearfix() {
+		*zoom: 1;
+		&:before, &:after {
+			content: "";
+			display: table;
+		}
+		&:after {
+			clear: both;
+		}
+	}
+	.box-sizing(@type: border-box) {
+		-webkit-box-sizing: @type;
+		-moz-box-sizing:    @type;
+		box-sizing:         @type;
+	}
+}
